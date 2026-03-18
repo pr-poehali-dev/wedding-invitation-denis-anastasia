@@ -383,6 +383,63 @@ export default function Index() {
               <span>Чёрный цвет</span>
             </div>
           </div>
+
+          {/* ОБРАЗЫ */}
+          <div className="outfits-section">
+            <div className="outfits-col">
+              <div className="outfits-col-title">
+                <span className="outfits-gender-icon">♀</span>
+                Образы для женщин
+              </div>
+              <div className="outfits-grid">
+                <div className="outfit-card">
+                  <div className="outfit-img-wrap">
+                    <img src="https://cdn.poehali.dev/projects/081466b6-3590-4a86-8811-24376c8eba01/files/151892c5-d609-418b-82ba-0b6b27676f79.jpg" alt="Женский образ 1" />
+                  </div>
+                  <div className="outfit-caption">
+                    <strong>Нежный</strong>
+                    <span>Мятное миди-платье, жемчуг, белые каблуки</span>
+                  </div>
+                </div>
+                <div className="outfit-card">
+                  <div className="outfit-img-wrap">
+                    <img src="https://cdn.poehali.dev/projects/081466b6-3590-4a86-8811-24376c8eba01/files/7478a826-d98a-4d5c-8b55-72b01352d1bf.jpg" alt="Женский образ 2" />
+                  </div>
+                  <div className="outfit-caption">
+                    <strong>Элегантный</strong>
+                    <span>Сапфировое вечернее платье, серебряные украшения</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="outfits-col">
+              <div className="outfits-col-title">
+                <span className="outfits-gender-icon">♂</span>
+                Образы для мужчин
+              </div>
+              <div className="outfits-grid">
+                <div className="outfit-card">
+                  <div className="outfit-img-wrap">
+                    <img src="https://cdn.poehali.dev/projects/081466b6-3590-4a86-8811-24376c8eba01/files/b4397dea-0166-4bf6-ab50-be72d48959c8.jpg" alt="Мужской образ 1" />
+                  </div>
+                  <div className="outfit-caption">
+                    <strong>Лёгкий</strong>
+                    <span>Голубой костюм, белая рубашка, бирюзовый платок</span>
+                  </div>
+                </div>
+                <div className="outfit-card">
+                  <div className="outfit-img-wrap">
+                    <img src="https://cdn.poehali.dev/projects/081466b6-3590-4a86-8811-24376c8eba01/files/5b2305a6-c5ee-42dd-a2fa-712839c094dd.jpg" alt="Мужской образ 2" />
+                  </div>
+                  <div className="outfit-caption">
+                    <strong>Классический</strong>
+                    <span>Тёмно-синий костюм, белая рубашка, стальной галстук</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
