@@ -60,19 +60,15 @@ const timeline = [
   },
 ];
 
-const dresscode: { color: string; name: string; border?: boolean }[] = [
-  { color: "#FFFFFF", name: "Белый", border: true },
-  { color: "#F0FAFA", name: "Айвори" },
-  { color: "#C8EBEB", name: "Мята" },
-  { color: "#7BC8C8", name: "Бирюза" },
-  { color: "#3AACAC", name: "Тил" },
-  { color: "#B0D8E8", name: "Небесный" },
-  { color: "#4A90C4", name: "Синий" },
-  { color: "#2E6FA8", name: "Королевский" },
-  { color: "#1A5276", name: "Сапфир" },
-  { color: "#5B9BAE", name: "Морская волна" },
-  { color: "#A8D4E0", name: "Лазурный" },
-  { color: "#7EB8C9", name: "Стальной" },
+const dresscodeGroups = [
+  {
+    name: "Бирюзово-синяя гамма",
+    gradient: "linear-gradient(135deg, #3AACAC 0%, #5B9BAE 30%, #4A90C4 60%, #1A5276 100%)",
+  },
+  {
+    name: "Пастельные тона",
+    gradient: "linear-gradient(135deg, #F9E8E0 0%, #F0FAFA 30%, #C8EBEB 60%, #B0D8E8 100%)",
+  },
 ];
 
 type FormData = {
@@ -352,16 +348,13 @@ export default function Index() {
             чисто белого (для невесты) и чёрного цвета.
           </p>
           <div className="dresscode-palette">
-            {dresscode.map((c) => (
-              <div key={c.name} className="dresscode-swatch">
+            {dresscodeGroups.map((g) => (
+              <div key={g.name} className="dresscode-swatch">
                 <div
-                  className="swatch-circle"
-                  style={{
-                    background: c.color,
-                    border: c.border ? "2px solid #c8ebeb" : undefined,
-                  }}
+                  className="swatch-circle swatch-circle--large"
+                  style={{ background: g.gradient }}
                 />
-                <span className="swatch-name">{c.name}</span>
+                <span className="swatch-name">{g.name}</span>
               </div>
             ))}
           </div>

@@ -653,6 +653,10 @@
 .swatch-circle:hover {
   transform: scale(1.1);
 }
+.swatch-circle--large {
+  width: 120px;
+  height: 120px;
+}
 .swatch-name {
   font-size: 0.72rem;
   font-weight: 500;
