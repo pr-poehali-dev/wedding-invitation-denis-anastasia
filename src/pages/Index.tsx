@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
+import EnvelopeScreen from "@/components/EnvelopeScreen";
 
 const WEDDING_DATE = new Date("2026-07-08T10:50:00");
 
@@ -45,17 +46,17 @@ const timeline = [
     address: "ул. Малиновского, дом 50Б, Ростов-на-Дону",
   },
   {
-    time: "18:00",
-    icon: "Music",
-    title: "Вечер и танцы",
-    desc: "Продолжение праздника с живой музыкой и весельем",
+    time: "21:00",
+    icon: "Cake",
+    title: "Вынос торта",
+    desc: "Сладкий момент — торжественный вынос свадебного торта",
     address: "Palladio Hall",
   },
   {
-    time: "23:00",
+    time: "22:00",
     icon: "Star",
     title: "Финал торжества",
-    desc: "Праздничный торт и прощальный вальс",
+    desc: "Прощальный вальс и самые тёплые объятия",
     address: "Palladio Hall",
   },
 ];
@@ -77,28 +78,36 @@ type FormData = {
   attendance: string;
   guests: string;
   food: string;
-  alcohol: string;
+  alcohol: string[];
   transfer: string;
   song: string;
   wish: string;
+  childrenCount: string;
+  childrenAges: string;
+  track: string;
 };
 
 export default function Index() {
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE);
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [envelopeOpened, setEnvelopeOpened] = useState(false);
   const [form, setForm] = useState<FormData>({
     name: "",
     phone: "",
     attendance: "",
     guests: "1",
     food: "",
-    alcohol: "",
+    alcohol: [],
     transfer: "",
     song: "",
     wish: "",
+    childrenCount: "",
+    childrenAges: "",
+    track: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -118,8 +127,30 @@ export default function Index() {
     setMenuOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleAlcoholChange = (opt: string) => {
+    setForm((prev) => ({
+      ...prev,
+      alcohol: prev.alcohol.includes(opt)
+        ? prev.alcohol.filter((a) => a !== opt)
+        : [...prev.alcohol, opt],
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    try {
+      const func2url = await import("../../backend/func2url.json");
+      const url = (func2url.default as Record<string, string>)["send-rsvp"];
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+    } catch {
+      // silent
+    }
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -129,9 +160,14 @@ export default function Index() {
     { id: "timeline", label: "Программа" },
     { id: "venues", label: "Место" },
     { id: "dresscode", label: "Дресс-код" },
+    { id: "wishes", label: "Пожелания" },
     { id: "rsvp", label: "Анкета" },
     { id: "contacts", label: "Контакты" },
   ];
+
+  if (!envelopeOpened) {
+    return <EnvelopeScreen onOpen={() => setEnvelopeOpened(true)} />;
+  }
 
   return (
     <div className="wedding-app">
@@ -178,14 +214,17 @@ export default function Index() {
         />
         <div className="hero-overlay" />
         <div className="hero-content">
+          <div className="hero-heart-icon">♥</div>
           <p className="hero-invite">приглашают вас на свою свадьбу</p>
           <h1 className="hero-names">
-            Денис<span className="hero-amp"> & </span>Анастасия
+            Денис<span className="hero-amp"> &amp; </span>Анастасия
           </h1>
-          <div className="hero-date-line">
-            <span className="hero-date-decor" />
-            <span className="hero-date">08 · 07 · 2026</span>
-            <span className="hero-date-decor" />
+          <div className="hero-big-date">
+            <span className="hero-big-day">08</span>
+            <span className="hero-big-sep">·</span>
+            <span className="hero-big-month">07</span>
+            <span className="hero-big-sep">·</span>
+            <span className="hero-big-year">2026</span>
           </div>
           <p className="hero-city">Ростов-на-Дону</p>
           <button onClick={() => scrollTo("rsvp")} className="hero-btn">
@@ -439,6 +478,28 @@ export default function Index() {
         </div>
       </section>
 
+      {/* WISHES / NO FLOWERS */}
+      <section id="wishes" className="section bg-warm">
+        <div className="section-inner center">
+          <span className="section-tag">Пожелания</span>
+          <h2 className="section-title">Маленькая просьба от сердца</h2>
+          <div className="wishes-card">
+            <div className="wishes-icon">🌿</div>
+            <p className="wishes-text">
+              Мы хотим, чтобы этот день был наполнен теплом, смехом и вашим присутствием рядом.
+              Именно поэтому — с нежностью и улыбкой — просим вас <strong>не дарить цветы</strong>.
+            </p>
+            <p className="wishes-text wishes-text--italic">
+              Они прекрасны, но недолговечны. А вот ваши объятия, слова и воспоминания,
+              которые мы создадим вместе, останутся с нами навсегда. ♡
+            </p>
+            <p className="wishes-text">
+              Лучший подарок — ваша улыбка на фотографиях и радость от того, что вы рядом.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* RSVP */}
       <section id="rsvp" className="section bg-ivory">
         <div className="section-inner center">
@@ -528,16 +589,44 @@ export default function Index() {
                   </div>
 
                   <div className="form-group">
-                    <label>Алкогольные предпочтения</label>
-                    <div className="radio-group">
-                      {["Вино", "Шампанское", "Крепкие напитки", "Только безалкогольное"].map((opt) => (
-                        <label key={opt} className="radio-label">
+                    <label>Сколько детей придут с вами?</label>
+                    <input
+                      type="text"
+                      placeholder="Например: 2"
+                      value={form.childrenCount}
+                      onChange={(e) => setForm({ ...form, childrenCount: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Возраст детей</label>
+                    <input
+                      type="text"
+                      placeholder="Например: 3 года, 7 лет"
+                      value={form.childrenAges}
+                      onChange={(e) => setForm({ ...form, childrenAges: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Какой алкоголь предпочитаете? (можно несколько)</label>
+                    <div className="checkbox-group">
+                      {[
+                        "Вино белое",
+                        "Вино красное",
+                        "Виски",
+                        "Водка",
+                        "Джин",
+                        "Ром",
+                        "Шампанское",
+                        "Безалкогольные напитки",
+                      ].map((opt) => (
+                        <label key={opt} className="checkbox-label">
                           <input
-                            type="radio"
-                            name="alcohol"
+                            type="checkbox"
                             value={opt}
-                            checked={form.alcohol === opt}
-                            onChange={(e) => setForm({ ...form, alcohol: e.target.value })}
+                            checked={form.alcohol.includes(opt)}
+                            onChange={() => handleAlcoholChange(opt)}
                           />
                           <span>{opt}</span>
                         </label>
@@ -564,12 +653,12 @@ export default function Index() {
                   </div>
 
                   <div className="form-group">
-                    <label>Ваша любимая песня для танцпола</label>
+                    <label>Ваш любимый музыкальный трек</label>
                     <input
                       type="text"
-                      placeholder="Название песни и исполнитель"
-                      value={form.song}
-                      onChange={(e) => setForm({ ...form, song: e.target.value })}
+                      placeholder="Исполнитель — Название"
+                      value={form.track}
+                      onChange={(e) => setForm({ ...form, track: e.target.value })}
                     />
                   </div>
                 </>
@@ -585,9 +674,14 @@ export default function Index() {
                 />
               </div>
 
-              <button type="submit" className="submit-btn">
-                Отправить анкету
+              <button type="submit" className="submit-btn" disabled={submitting}>
+                {submitting ? "Отправляем..." : "Отправить анкету"}
               </button>
+              <p className="rsvp-footnote">
+                ✦ Каждый гость заполняет анкету <em>отдельно</em> — у каждого из вас своя история этого дня.
+                Детей указывать <em>один раз</em> в одной из анкет, с указанием возраста малышей.
+                Спасибо, что уделили время — это важно для нас! ♡
+              </p>
             </form>
           )}
         </div>

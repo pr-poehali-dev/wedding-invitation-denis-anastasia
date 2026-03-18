@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "RSVP OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "RSVP submit test",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Тест Тестов",
+        "phone": "+7 999 000-00-00",
+        "attendance": "Да, обязательно буду!",
+        "guests": "2",
+        "food": "Мясное меню",
+        "alcohol": ["Шампанское", "Вино белое"],
+        "transfer": "Нет, доберусь сам(а)",
+        "track": "Земфира — Хочешь",
+        "wish": "Совет да любовь!",
+        "childrenCount": "1",
+        "childrenAges": "5 лет"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
