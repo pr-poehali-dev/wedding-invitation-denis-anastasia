@@ -341,9 +341,9 @@ export default function Index() {
           <span className="section-tag">Дресс-код</span>
           <h2 className="section-title">Предпочтения в одежде</h2>
           <p className="dresscode-hint">
-            Наша свадьба — в бело-бирюзовой гамме. Мы будем рады, если гости
-            поддержат этот воздушный стиль: белые, мятные и бирюзовые оттенки
-            создадут гармоничный образ всего торжества.
+            Наша свадьба — в бело-бирюзовой гамме. Белые, мятные и бирюзовые
+            оттенки создадут единый образ торжества. Просим воздержаться от
+            чисто белого (для невесты) и чёрного цвета.
           </p>
           <div className="dresscode-palette">
             {dresscode.map((c) => (
@@ -370,11 +370,11 @@ export default function Index() {
             </div>
             <div className="dresscode-rule rule-no">
               <span className="rule-icon">✗</span>
-              <span>Чёрный и тёмные тона</span>
+              <span>Чисто белый — только для невесты</span>
             </div>
             <div className="dresscode-rule rule-no">
               <span className="rule-icon">✗</span>
-              <span>Яркие кислотные цвета</span>
+              <span>Чёрный цвет</span>
             </div>
           </div>
         </div>
