@@ -347,6 +347,9 @@ export default function Index() {
             оттенки создадут единый образ торжества. Просим воздержаться от
             чисто белого (для невесты) и чёрного цвета.
           </p>
+          <p className="dresscode-hint" style={{marginTop: '0.5rem', fontStyle: 'italic', opacity: 0.75}}>
+            Но честно — главное, чтобы вы пришли! Хоть в пижаме, хоть в доспехах 🛡️ Цвет одежды важен куда меньше, чем ваше присутствие и хорошее настроение.
+          </p>
           <div className="dresscode-palette">
             {dresscodeGroups.map((g) => (
               <div key={g.name} className="dresscode-swatch">
