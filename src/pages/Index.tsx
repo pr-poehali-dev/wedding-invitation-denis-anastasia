@@ -60,13 +60,13 @@ const timeline = [
   },
 ];
 
-const dresscode = [
-  { color: "#F5E6D8", name: "Пудровый" },
-  { color: "#E8D5C4", name: "Айвори" },
-  { color: "#C9B5A6", name: "Капучино" },
-  { color: "#D4C5B5", name: "Беж" },
-  { color: "#B8A9A0", name: "Лён" },
-  { color: "#9E8E85", name: "Тауп" },
+const dresscode: { color: string; name: string; border?: boolean }[] = [
+  { color: "#FFFFFF", name: "Белый", border: true },
+  { color: "#F0FAFA", name: "Айвори" },
+  { color: "#C8EBEB", name: "Мята" },
+  { color: "#7BC8C8", name: "Бирюза" },
+  { color: "#3AACAC", name: "Тил" },
+  { color: "#B0D8E8", name: "Небесный" },
 ];
 
 type FormData = {
@@ -341,13 +341,20 @@ export default function Index() {
           <span className="section-tag">Дресс-код</span>
           <h2 className="section-title">Предпочтения в одежде</h2>
           <p className="dresscode-hint">
-            Мы будем рады, если вы поддержите нашу нежную цветовую палитру.
-            Просим воздержаться от белого и чёрного цвета.
+            Наша свадьба — в бело-бирюзовой гамме. Мы будем рады, если гости
+            поддержат этот воздушный стиль: белые, мятные и бирюзовые оттенки
+            создадут гармоничный образ всего торжества.
           </p>
           <div className="dresscode-palette">
             {dresscode.map((c) => (
               <div key={c.name} className="dresscode-swatch">
-                <div className="swatch-circle" style={{ background: c.color }} />
+                <div
+                  className="swatch-circle"
+                  style={{
+                    background: c.color,
+                    border: c.border ? "2px solid #c8ebeb" : undefined,
+                  }}
+                />
                 <span className="swatch-name">{c.name}</span>
               </div>
             ))}
@@ -355,19 +362,19 @@ export default function Index() {
           <div className="dresscode-rules">
             <div className="dresscode-rule rule-yes">
               <span className="rule-icon">✓</span>
-              <span>Пастельные и нежные тона</span>
+              <span>Белый, айвори и кремовый</span>
             </div>
             <div className="dresscode-rule rule-yes">
               <span className="rule-icon">✓</span>
-              <span>Элегантные вечерние наряды</span>
+              <span>Мятный, бирюзовый, небесный</span>
             </div>
             <div className="dresscode-rule rule-no">
               <span className="rule-icon">✗</span>
-              <span>Белый и молочный — только для невесты</span>
+              <span>Чёрный и тёмные тона</span>
             </div>
             <div className="dresscode-rule rule-no">
               <span className="rule-icon">✗</span>
-              <span>Строгий чёрный цвет</span>
+              <span>Яркие кислотные цвета</span>
             </div>
           </div>
         </div>

@@ -25,15 +25,15 @@
     --ring: 18 35% 65%;
     --radius: 0.75rem;
 
-    /* Wedding palette */
-    --clr-ivory: #faf6f0;
-    --clr-blush: #f5e6d8;
-    --clr-warm: #edd9c8;
-    --clr-rose: #c9927a;
-    --clr-roseDark: #a87060;
-    --clr-text: #3d2e26;
-    --clr-textLight: #7a6055;
-    --clr-gold: #c4a882;
+    /* Wedding palette — white & teal */
+    --clr-ivory: #f4fafa;
+    --clr-blush: #e0f3f3;
+    --clr-warm: #c8ebeb;
+    --clr-rose: #3aacac;
+    --clr-roseDark: #278a8a;
+    --clr-text: #1a3535;
+    --clr-textLight: #456868;
+    --clr-gold: #7bc8c8;
   }
 }
 
