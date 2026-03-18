@@ -67,6 +67,12 @@ const dresscode: { color: string; name: string; border?: boolean }[] = [
   { color: "#7BC8C8", name: "Бирюза" },
   { color: "#3AACAC", name: "Тил" },
   { color: "#B0D8E8", name: "Небесный" },
+  { color: "#4A90C4", name: "Синий" },
+  { color: "#2E6FA8", name: "Королевский" },
+  { color: "#1A5276", name: "Сапфир" },
+  { color: "#5B9BAE", name: "Морская волна" },
+  { color: "#A8D4E0", name: "Лазурный" },
+  { color: "#7EB8C9", name: "Стальной" },
 ];
 
 type FormData = {
